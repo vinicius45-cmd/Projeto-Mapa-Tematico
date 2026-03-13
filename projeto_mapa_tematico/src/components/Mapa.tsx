@@ -3,7 +3,6 @@ import { MapContainer, TileLayer, GeoJSON, useMap, Marker, Popup } from 'react-l
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
-// Importar o tipo Linha
 import type { Linha } from '../types/Linha'; 
 
 // 1. ÍCONE PADRÃO (Azul original do Leaflet)

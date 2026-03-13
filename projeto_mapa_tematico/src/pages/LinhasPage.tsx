@@ -16,25 +16,33 @@ export const LinhasPage = () => {
       <h2>Linhas de Ônibus</h2>
       <div className="list-layout">
         <aside>
-          {linhas.map(linha => (
-            <div key={linha.id} onClick={() => setLinhaDetalhada(linha)}>
+          {linhas.map((linha, index) => (
+            // Adicionado index na key para garantir unicidade caso o id se repita em sentidos diferentes
+            <div key={`${linha.id_linha || index}`} onClick={() => setLinhaDetalhada(linha)}>
               <Card dados={linha} />
             </div>
           ))}
         </aside>
 
-        {/* Requisito da Fase 3: Exibir detalhes (paradas) ao clicar */}
+        {/*Exibir detalhes (paradas) ao clicar */}
         <main>
           {linhaDetalhada ? (
             <div className="detalhes">
-              <h3>Detalhes da Linha {linhaDetalhada.nome}</h3>
-              <p>Rota: {linhaDetalhada.rota}</p>
+              {/* Mudança: .nome para .cd_linha */}
+              <h3>Detalhes da Linha {linhaDetalhada.cd_linha}</h3>
+              {/* Mudança: .rota para .tx_linha */}
+              <p>Rota: {linhaDetalhada.tx_linha}</p>
               <h4>Paradas:</h4>
               <ul>
-                {linhaDetalhada.paradas.map(p => (
-                  <li key={p.id}>{p.nome}</li>
+                {/* Mudança: Adicionado ?. para evitar erro de undefined e ajuste nos nomes das propriedades da parada */}
+                {(linhaDetalhada as any).paradas?.map((p: any) => (
+                  <li key={p.id_parada || p.id}>{p.nm_parada || p.nome}</li>
                 ))}
               </ul>
+              {/* Aviso caso não existam paradas carregadas no objeto */}
+              {!(linhaDetalhada as any).paradas && (
+                <p style={{ color: '#999', fontSize: '0.8rem' }}>Nenhuma parada carregada para esta linha.</p>
+              )}
             </div>
           ) : (
             <p>Selecione uma linha para ver as paradas.</p>

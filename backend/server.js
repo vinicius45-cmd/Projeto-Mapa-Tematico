@@ -16,7 +16,6 @@ const pool = new Pool({
   ssl: false
 });
 
-// --- Rota de Linhas (Atualizada com Join de Operadora e Prefixo) ---
 app.get('/linhas', async (req, res) => {
   const query = `
     SELECT
@@ -49,7 +48,6 @@ app.get('/linhas', async (req, res) => {
   }
 });
 
-// --- Rota de Paradas com Raios Independentes ---
 app.get('/paradas/busca', async (req, res) => {
   const { codigo, sentido } = req.query;
   if (!codigo || !sentido) return res.status(400).json({ error: 'Faltam parâmetros' });

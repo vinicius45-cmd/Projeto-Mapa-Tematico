@@ -1,4 +1,3 @@
-// services/api.ts
 export const buscarLinhasSITURB = async () => {
   try {
     const response = await fetch('http://localhost:3000/linhas');
