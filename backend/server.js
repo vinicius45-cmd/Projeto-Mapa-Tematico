@@ -55,7 +55,7 @@ app.get('/paradas/busca', async (req, res) => {
   const sentidoUpper = sentido.trim().toUpperCase();
 
   const RAIOS = {
-    'IDA': 0.00012,  
+    'IDA': 0.00012,
     'VOLTA': 0.00012,
     'CIRCULAR': 0.00012,
     'PADRAO': 0.001
@@ -68,7 +68,7 @@ app.get('/paradas/busca', async (req, res) => {
       SELECT ti.geo_linhas_lin
       FROM dados_mobilidade.tab_itinerario ti
       INNER JOIN dados_mobilidade.tab_linha tl ON tl.id_linha = ti.id_linha
-      WHERE REGEXP_REPLACE(CAST(tl.cd_linha AS TEXT), '[^0-9a-zA-Z]', '', 'g') 
+      WHERE REGEXP_REPLACE(CAST(tl.cd_linha AS TEXT), '[^0-9a-zA-Z]', '', 'g')
             = REGEXP_REPLACE($1, '[^0-9a-zA-Z]', '', 'g')
       AND TRIM(UPPER(ti.lin_sentido)) = $2
       LIMIT 1
@@ -80,9 +80,9 @@ app.get('/paradas/busca', async (req, res) => {
       ST_LineLocatePoint(ls.geo_linhas_lin, p.geom_parada) as ordem_progresso
     FROM
       dados_mobilidade.tab_parada p
-    CROSS JOIN 
+    CROSS JOIN
       linha_selecionada ls
-    WHERE 
+    WHERE
       ST_DWithin(p.geom_parada, ls.geo_linhas_lin, $3)
     ORDER BY p.id, ordem_progresso ASC;
   `;
@@ -90,11 +90,11 @@ app.get('/paradas/busca', async (req, res) => {
   try {
     const result = await pool.query(query, [codigo.trim(), sentidoUpper, raioBusca]);
     const paradas = result.rows.sort((a, b) => a.ordem_progresso - b.ordem_progresso);
-    
+
     console.log(`--------------------------------------------------`);
     console.log(`🚌 LINHA: ${codigo} | SENTIDO: ${sentidoUpper}`);
     console.log(`📏 RAIO: ${raioBusca} | 📍 PARADAS: ${paradas.length}`);
-    
+
     res.json(paradas);
   } catch (err) {
     console.error('❌ Erro no SQL:', err);

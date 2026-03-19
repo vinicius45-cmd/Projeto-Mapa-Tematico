@@ -5,7 +5,7 @@ interface CardProps {
   dados: Linha; 
 }
 
-export const Card: React.FC<CardProps> = ({ dados }) => {
+export const Card = ({ dados }: { dados: Linha }) => {
   return (
     <div style={{ 
       border: '1px solid #ddd', 

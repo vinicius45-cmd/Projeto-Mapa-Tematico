@@ -1,0 +1,13 @@
+/* Força o tamanho dos ícones do Leaflet caso o CSS global os tenha escondido */
+.leaflet-marker-icon {
+  width: 25px !important;
+  height: 41px !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Garante que o ícone focado fique na frente */
+.stop-marker-focus {
+  z-index: 9999 !important;
+}
