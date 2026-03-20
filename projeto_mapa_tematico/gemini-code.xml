@@ -1,0 +1,302 @@
+This file is a merged representation of a subset of the codebase, containing specifically included files, combined into a single document by Repomix.
+The content has been processed where content has been compressed (code blocks are separated by ⋮---- delimiter).
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of a subset of the repository's contents that is considered the most important context.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Only files matching these patterns are included: src/**/*, vite.config.js, package.json
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Content has been compressed - code blocks are separated by ⋮---- delimiter
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+</file_summary>
+
+<directory_structure>
+package.json
+src/App.tsx
+src/assets/icons/blue-stop-marker.png
+src/assets/icons/marker-shadow.png
+src/assets/icons/red-stop-marker.png
+src/components/Card.tsx
+src/components/Footer.tsx
+src/components/Header.tsx
+src/components/index.ts
+src/components/Mapa.lazy.tsx
+src/components/Mapa.tsx
+src/configs/mapIcons.ts
+src/index.css
+src/main.tsx
+src/pages/Home.tsx
+src/pages/index.ts
+src/pages/LinhasPage.tsx
+src/services/api.ts
+src/types/Linha.ts
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path="package.json">
+{
+  "name": "projeto_mapa_tematico",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "leaflet": "1.9.4",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "react-leaflet": "4.2.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@types/node": "^24.10.1",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.1.1",
+    "eslint": "^9.39.1",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.4.24",
+    "globals": "^16.5.0",
+    "rollup-plugin-visualizer": "^7.0.1",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "^8.48.0",
+    "vite": "^7.3.1"
+  }
+}
+</file>
+
+<file path="src/App.tsx">
+import { Home } from './pages/Home';
+⋮----
+function App()
+⋮----
+// Aqui você poderia ter a lógica de rotas no futuro
+</file>
+
+<file path="src/components/Card.tsx">
+import React from 'react';
+import type { Linha } from '../types/Linha';
+⋮----
+interface CardProps {
+  dados: Linha; 
+}
+</file>
+
+<file path="src/components/Footer.tsx">
+
+</file>
+
+<file path="src/components/Header.tsx">
+
+</file>
+
+<file path="src/components/index.ts">
+// Exportando todos os componentes da pasta para o mundo exterior
+</file>
+
+<file path="src/components/Mapa.lazy.tsx">
+import { lazy } from 'react';
+⋮----
+// Isso faz com que o bundle inicial do JS fique muito mais leve
+</file>
+
+<file path="src/components/Mapa.tsx">
+import { useEffect, useRef } from 'react';
+import { MapContainer, TileLayer, GeoJSON, Marker, Popup, useMap } from 'react-leaflet';
+import L from 'leaflet';
+⋮----
+// Importando os ícones agora que os nomes estão corrigidos em src/assets/icons
+import { stopIcon, stopFocusIcon } from '../configs/mapIcons';
+⋮----
+const ControladorDeCamera = (
+⋮----
+// 1. Focar na parada selecionada e aproximar o zoom
+⋮----
+// 2. Ajustar zoom para a linha inteira quando ela for carregada/alterada
+⋮----
+{/* Mapeamento das paradas de ônibus */}
+⋮----
+// A key dinâmica com 'estaFocada' força o Leaflet a renderizar o ícone correto na troca
+⋮----
+// ZIndex maior para o ícone vermelho não ser coberto pelos azuis
+</file>
+
+<file path="src/configs/mapIcons.ts">
+import L from 'leaflet';
+⋮----
+/**
+ * Usando caminhos absolutos baseados na raiz do projeto Vite.
+ * Certifique-se de que os nomes dos arquivos estão EXATAMENTE assim na pasta.
+ */
+import blueIconUrl from '/src/assets/icons/blue-stop-marker.png';
+import redIconUrl from '/src/assets/icons/red-stop-marker.png';
+import shadowIconUrl from '/src/assets/icons/marker-shadow.png';
+</file>
+
+<file path="src/index.css">
+/* Força o tamanho dos ícones do Leaflet caso o CSS global os tenha escondido */
+.leaflet-marker-icon {
+⋮----
+/* Garante que o ícone focado fique na frente */
+.stop-marker-focus {
+</file>
+
+<file path="src/main.tsx">
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+</file>
+
+<file path="src/pages/Home.tsx">
+import { useState, useEffect, Suspense, useMemo } from 'react';
+import { Card } from '../components';
+import { MapaLazy } from '../components/Mapa.lazy';
+import { api } from '../services/api';
+import type { Linha, Parada } from '../types/Linha';
+⋮----
+// --- NOVA LÓGICA DE DESTAQUE ---
+⋮----
+const formatarCodigo = (codigo: any)
+⋮----
+// Carregamento inicial das linhas
+⋮----
+// Filtro de busca
+⋮----
+const selecionarLinha = (linha: Linha) =>
+⋮----
+// Busca de paradas quando a linha ou sentido muda
+⋮----
+// Memoriza a geometria correta baseada no sentido
+⋮----
+const lidarComCliqueNaParada = (idParada: string | number) =>
+⋮----
+{/* MAPA (Fundo) */}
+⋮----
+onMouseLeave=
+onClick=
+</file>
+
+<file path="src/pages/index.ts">
+
+</file>
+
+<file path="src/pages/LinhasPage.tsx">
+import { useState, useEffect, Suspense } from 'react';
+import { Card } from '../components/Card';
+import { MapaLazy } from '../components/Mapa.lazy';
+import { api } from '../services/api';
+import type { Linha } from '../types/Linha';
+⋮----
+const [paradaFocada, setParadaFocada] = useState<string | null>(null); // ESTADO NOVO
+⋮----
+// Quando trocar de linha, resetamos a parada focada para evitar erros visualizando a linha anterior
+const handleSelecionarLinha = (linha: Linha) =>
+⋮----
+onClick=
+⋮----
+{/* LISTA DE PARADAS (Aparece apenas se a linha estiver selecionada) */}
+⋮----
+e.stopPropagation(); // Não deselecionar a linha ao clicar na parada
+setParadaFocada(String(parada.id_parada));
+⋮----
+paradaFocada={paradaFocada} // PASSANDO O ESTADO PARA O MAPA
+</file>
+
+<file path="src/services/api.ts">
+import type { Linha, Parada } from '../types/Linha';
+⋮----
+/**
+ * O Vite exige o prefixo VITE_ para expor variáveis ao navegador.
+ * Certifique-se de que VITE_API_URL esteja definida no seu arquivo .env
+ */
+⋮----
+console.log("Tentando conectar em:", API_BASE_URL); // Isso vai aparecer no F12 para confirmarmos
+⋮----
+/**
+   * Busca todas as linhas de ônibus disponíveis.
+   */
+async getLinhas(): Promise<Linha[]>
+⋮----
+/**
+   * Busca detalhes específicos de uma linha pelo ID.
+   */
+async getDetalhesLinha(id: number): Promise<any>
+⋮----
+/**
+   * Busca as paradas de uma linha específica baseada no código e sentido.
+   * Centraliza a formatação dos dados para o padrão da interface 'Parada'.
+   */
+async getParadas(codigo: string, sentido: string, signal?: AbortSignal): Promise<Parada[]>
+⋮----
+// Mapeia os dados do backend (que usa latitude/id) para o padrão do frontend (nr_latitude/id_parada)
+⋮----
+if (error.name === 'AbortError') return []; // Ignora erros de cancelamento de requisição
+</file>
+
+<file path="src/types/Linha.ts">
+export interface Parada {
+  id_parada: number;
+  nm_parada: string;
+  nr_latitude: number;
+  nr_longitude: number;
+  nr_sequencia: number;
+  // Adicione outros campos que venham do seu banco se necessário
+}
+⋮----
+// Adicione outros campos que venham do seu banco se necessário
+⋮----
+export interface Linha {
+  id_linha: number;
+  cd_linha: string;      // Ex: "001"
+  tx_linha: string;      // Ex: "Circular / Centro"
+  tp_sentido?: string;   // Opcional: Ida ou Volta
+  geometry?: any;        // GeoJSON vindo do PostGIS
+  paradas?: Parada[];    // A lista de paradas vinculadas
+}
+⋮----
+cd_linha: string;      // Ex: "001"
+tx_linha: string;      // Ex: "Circular / Centro"
+tp_sentido?: string;   // Opcional: Ida ou Volta
+geometry?: any;        // GeoJSON vindo do PostGIS
+paradas?: Parada[];    // A lista de paradas vinculadas
+</file>
+
+</files>
